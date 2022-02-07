@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Home from './screens/Home';
 import { store, StoreContext } from '../src/store/store';

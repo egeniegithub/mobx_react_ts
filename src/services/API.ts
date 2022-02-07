@@ -1,5 +1,3 @@
-import React from "react";
-import { useStore } from "../store/store";
 import { userType } from "../types";
 import requests from "./request";
 
@@ -12,10 +10,11 @@ export const getSingleUser = async (name: string) => {
 }
 
 export const addUser = async (data: userType) => {
-    let reqHeader = {
+    const reqHeader = {
         header: {
             "content-type": "application/json",
             Authorization: `bearer `,
+            auth: false
         }
     }
     return requests.post(data, reqHeader);

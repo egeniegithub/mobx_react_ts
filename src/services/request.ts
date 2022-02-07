@@ -1,4 +1,3 @@
-import React from "react";
 import { userType } from "../types";
 import users from './User.json';
 
@@ -11,7 +10,7 @@ const requests = {
         };
     },
     getUser: function (name: string) {
-        let user = userData.find(item => item.userName == name)
+        const user = userData.find(item => item.userName == name)
         if (user) {
             return {
                 status: 200,
@@ -24,12 +23,14 @@ const requests = {
             }
         }
     },
-    post: function (data: userType, header: object) {
+    post: function (data: userType, header: { "content-type": string, Authorization: string, auth: boolean } | any) {
+        const reqHeader = header;
+        reqHeader.auth = true;
         userData.push(data);
         return { status: 200, data: userData }
     },
     update: function (data: userType) {
-        let dataUsers = userData.map((item) => {
+        const dataUsers = userData.map((item) => {
             if (item.userName == data.userName) {
                 item = data
             }

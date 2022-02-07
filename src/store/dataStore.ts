@@ -1,6 +1,4 @@
-//@ts-ignore
-import { action, observable, makeAutoObservable } from 'mobx';
-import users from '../services/User.json';
+import { makeAutoObservable } from 'mobx';
 class DataStore {
     constructor() {
         // Call it here
@@ -8,8 +6,6 @@ class DataStore {
     }
     data: object[] = [];
     loadData(data: object[]) {
-        console.log("the loading data is",data);
-        
         this.data = data
     }
     addData(item: object) {
@@ -19,9 +15,5 @@ class DataStore {
         this.data.splice(this.data.indexOf(item), 1);
     }
 }
-// decorate(DataStore, {
-//     data: observable,
-//     addData: action,
-//     removeData: action
-// });
+
 export default DataStore;

@@ -1,15 +1,12 @@
 import * as React from "react";
 import { Dialog } from "@progress/kendo-react-dialogs";
-//@ts-ignore
-import { Form, Field, FormElement } from "@progress/kendo-react-form";
-import { Input, NumericTextBox } from "@progress/kendo-react-inputs";
+import { Input } from "@progress/kendo-react-inputs";
 import { DropDownList } from "@progress/kendo-react-dropdowns";
-import { Error } from "@progress/kendo-react-labels";
 import { observer } from "mobx-react-lite"
 import { useStore } from "../../store/store";
 import { useState } from "react";
 import { userType } from "../../types";
-let user = {
+const user = {
     userName: "",
     firstName: "",
     lastName: "",
@@ -24,9 +21,8 @@ const AddUser = observer((props: any) => {
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
-        console.log("the fields are", userData);
-        let newUser = userData;
-        let fullName = newUser.firstName.trim() + newUser.lastName.trim();
+        const newUser = userData;
+        const fullName = newUser.firstName.trim() + newUser.lastName.trim();
         if (fullName.length > 40) {
             alert('Full name must be less than 40 character')
             return;
@@ -52,7 +48,6 @@ const AddUser = observer((props: any) => {
     }
 
     const handleChange = (event: { target: { name: string; value: string; }, value: string } | any) => {
-        console.log("event", event);
 
         if (event.target.name === "userName") {
             setUserData({ ...userData, userName: event.value });

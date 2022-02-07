@@ -1,10 +1,10 @@
 
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Detail from "./Detail";
 
-const Home = (props: any) => {
+const Home = () => {
     return (
         <Router>
             <Routes>

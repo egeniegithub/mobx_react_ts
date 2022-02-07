@@ -4,7 +4,7 @@ import {
     DropDownList,
 } from "@progress/kendo-react-dropdowns";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Input, NumericTextBox } from "@progress/kendo-react-inputs";
+import { Input } from "@progress/kendo-react-inputs";
 import { getSingleUser, updateUser } from "../../services/API";
 import LoadingPanel from "../components/LoadingPanel";
 import { userType } from "../../types";
@@ -25,12 +25,10 @@ const Detail = () => {
     const [loading, setLoading] = useState(true);
 
     const { state } = useLocation();
-    console.log("the state is", state);
 
     useEffect(() => {
         setTimeout(async () => {
-            let resp = await getSingleUser(state as never);
-            console.log("resp is", resp);
+            const resp = await getSingleUser(state as never);
             if (resp.status == 200) {
                 setUserItem(resp.data as never);
                 setUserItemOriginal(resp.data as never);
@@ -58,9 +56,8 @@ const Detail = () => {
         }
         setLoading(true);
         event.preventDefault();
-        console.log("the fields are", userItem);
-        let newUser = userItem;
-        let fullName = newUser.firstName.trim() + newUser.lastName.trim();
+        const newUser = userItem;
+        const fullName = newUser.firstName.trim() + newUser.lastName.trim();
         if (fullName.length > 40) {
             alert('Full name must be less than 40 character')
             setLoading(false)
@@ -133,7 +130,7 @@ const Detail = () => {
             </div>
             <div className="k-form-buttons">
                 <button
-                className="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary"
+                    className="k-button k-button-md k-rounded-md k-button-solid k-button-solid-primary"
                     onClick={handleSubmit}
                 >
                     Update

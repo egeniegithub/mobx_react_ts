@@ -1,11 +1,8 @@
 
 import React, { FC, useEffect, useState } from "react";
-import { process } from '@progress/kendo-data-query';
-import { Grid, GridColumn, GridToolbar } from '@progress/kendo-react-grid';
-// import users from '../../services/User.json';
+import { Grid, GridColumn } from '@progress/kendo-react-grid';
 import { orderBy } from "@progress/kendo-data-query";
 import AddUser from "../AddUser";
-// import { observer } from 'mobx';
 import { observer } from "mobx-react-lite"
 import { useStore } from "../../store/store";
 import { toJS } from 'mobx'
@@ -29,13 +26,10 @@ const Dashboard: FC = observer(() => {
             dir: "asc",
         },
     ]);
-    const [allowUnsort, setAllowUnsort] = useState(true);
-    const [multiple, setMultiple] = useState(false);
 
     useEffect(() => {
         setTimeout(async () => {
-            let resp = await getUsers();
-            console.log("resp is", resp);
+            const resp = await getUsers();
             if (resp.status == 200) {
                 dataStore.loadData(resp.data);
                 setData(resp.data)
@@ -46,7 +40,7 @@ const Dashboard: FC = observer(() => {
     }, [])
 
     const sortChange = (event: { sort: any }) => {
-        let fetchSort = orderUsers(event.sort);
+        const fetchSort = orderUsers(event.sort);
         // setData(fetchSort);
         setFilterData(fetchSort)
         setSort(event.sort);
@@ -63,9 +57,8 @@ const Dashboard: FC = observer(() => {
             setFilterData(data);
             return
         }
-        let value = event.value.toLowerCase();
+        const value = event.value.toLowerCase();
         let result = [];
-        console.log(data);
         result = data.filter((item: any) => {
             return item.userName.toLowerCase().includes(value)
         });
@@ -105,8 +98,8 @@ const Dashboard: FC = observer(() => {
             </div>
             <Grid
                 sortable={{
-                    allowUnsort: allowUnsort,
-                    mode: multiple ? "multiple" : "single",
+                    allowUnsort: false,
+                    mode: "single",
                 }}
                 pageable={true}
                 sort={sort as never}
@@ -124,8 +117,7 @@ const Dashboard: FC = observer(() => {
                     setLoading(true)
                     setShowModal(false)
                     setTimeout(async () => {
-                        let resp = await addUser(user);
-                        console.log("resp is", resp);
+                        const resp = await addUser(user);
                         if (resp.status == 200) {
                             dataStore.loadData(resp.data);
                             setData(resp.data);
